@@ -48,6 +48,7 @@ public class program {
             //target_tank_y++;
         }
         System.out.println("Tenk je pogodjen: " + hitCount + " puta");
+        System.out.println("Ovo sam dodao samo da vidim radi li mi GIT kako treba");
             
 //        projectile_x++;
 //        System.out.println("Collision: " + (projectile_x>=target_tank_x));
