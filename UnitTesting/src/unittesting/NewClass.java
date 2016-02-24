@@ -9,9 +9,8 @@ package unittesting;
  *
  * @author Vladimir
  */
-public class Kartica {
-    public int platiPorez(int amount){
-        return amount-25;
+public class NewClass {
+    public int returnValue(){
+        return 100;
     }
-    
 }
