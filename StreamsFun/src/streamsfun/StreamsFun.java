@@ -28,7 +28,7 @@ public class StreamsFun {
 //        InputStream is = new FileInputStream("vlada.txt");
 //        System.out.println((char)is.read());
 //        System.out.println((char)is.read());
-//        System.out.println((char)is.read());
+;
 //        System.out.println((char)is.read());
 //        System.out.println((char)is.read());
         Reader rdr = new FileReader("vlada.txt");
