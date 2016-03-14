@@ -21,12 +21,12 @@ public class Fitness {
      */
     public static void main(String[] args) throws SQLException {
         // TODO code application logic here
-        Rezultat rez = new Rezultat(1,"Dule",4,890);
+        Rezultat rez = new Rezultat(1,"vlada",25 ,158965);
         System.out.println(rez.toString());
         DBHelper dbh = new DBHelper();
        // Connection cn = dbh.connect();
-        //dbh.add(rez);
-        dbh.update(new Rezultat(1,"Uros",2.5,180));
+        dbh.add(rez);
+        //dbh.update(new Rezultat(1,"Uros",2.5,180));
         
     }
     
