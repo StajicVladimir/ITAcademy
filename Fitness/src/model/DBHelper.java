@@ -18,6 +18,16 @@ public class DBHelper {
         return DriverManager.getConnection("jdbc:mysql://localhost/fitness","root", "Fanta82ns");
     }
     
+    public Rezultat get(int id) throws SQLException{
+        Connection conn = connect();
+        PreparedStatement st = conn.prepareStatement("Select * from rezultati where id = ?");
+        st.setInt(1, id);
+        ResultSet rs = st.executeQuery();
+        if(rs.next()){
+            return new Rezultat(rs.getInt("id"),rs.getString("ime"),rs.getDouble(3), rs.getInt(4));
+        }
+        return null;
+    }
     public List get() throws SQLException{
         return get("");
     }
@@ -39,7 +49,7 @@ public class DBHelper {
         Connection conn = connect();
         PreparedStatement st = conn.prepareStatement("DELETE FROM rezultati WHERE id = ?");
         st.setInt(1,id);
-        
+        st.execute();
         boolean res = st.getUpdateCount()>1;
         conn.close();
         return res;
@@ -72,5 +82,14 @@ public class DBHelper {
         conn.close();
         
         return res;
+    }
+    public boolean login(String username, String pass) throws SQLException{
+        Connection conn = connect();
+        
+        PreparedStatement st = conn.prepareStatement("SELECT * FROM users where ime = ? AND sifra = password(?)");
+        st.setString(1, username);
+        st.setString(2, pass);
+        ResultSet rs = st.executeQuery();
+        return rs.next();
     }
 }
