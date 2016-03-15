@@ -6,6 +6,8 @@
 package model;
 
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -16,6 +18,23 @@ public class DBHelper {
         return DriverManager.getConnection("jdbc:mysql://localhost/fitness","root", "Fanta82ns");
     }
     
+    public List get() throws SQLException{
+        return get("");
+    }
+    //Return all scores from base
+    public List get(String filter) throws SQLException{
+        ArrayList res = new ArrayList();
+        Connection conn = connect();
+        
+        PreparedStatement st = conn.prepareStatement("SELECT * FROM rezultati"+filter);
+        ResultSet rs = st.executeQuery();
+        while(rs.next()){
+            res.add(new Rezultat(rs.getInt("id"),rs.getString("ime"),rs.getDouble("km"),rs.getInt("vreme")));
+        }
+        conn.close();
+        return res;
+    }
+    //
     public boolean delete(int id) throws SQLException{
         Connection conn = connect();
         PreparedStatement st = conn.prepareStatement("DELETE FROM rezultati WHERE id = ?");
