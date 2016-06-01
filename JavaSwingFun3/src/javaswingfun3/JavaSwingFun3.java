@@ -49,5 +49,6 @@ public class JavaSwingFun3 {
         jFrame.setDefaultCloseOperation(EXIT_ON_CLOSE);
         jFrame.setVisible(true);
     }
+    Dimension d = new Dimension
     
 }
