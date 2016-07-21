@@ -84,3 +84,6 @@
 /JMSExample/JMSExample-ejb/dist/
 /JMSExample/JMSExample-war/build/
 /JMSExample/JMSExample-war/dist/
+/SpringWebMVCApp/nbproject/private/
+/SpringWebMVCApp/dist/
+/SpringWebMVCApp/build/
