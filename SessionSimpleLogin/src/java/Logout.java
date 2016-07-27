@@ -4,16 +4,8 @@
  * and open the template in the editor.
  */
 
-import com.sun.xml.ws.tx.at.v10.types.PrepareResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
-import java.sql.Connection;
-import java.sql.DriverManager;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -25,8 +17,8 @@ import javax.servlet.http.HttpSession;
  *
  * @author Vladimir
  */
-@WebServlet(urlPatterns = {"/login"})
-public class Login extends HttpServlet {
+@WebServlet(urlPatterns = {"/logout"})
+public class Logout extends HttpServlet {
 
     /**
      * Processes requests for both HTTP <code>GET</code> and <code>POST</code>
@@ -39,35 +31,9 @@ public class Login extends HttpServlet {
      */
     protected void processRequest(HttpServletRequest request, HttpServletResponse response)
             throws ServletException, IOException {
-        
         response.setContentType("text/html;charset=UTF-8");
-        try (PrintWriter out = response.getWriter()) {
-            try{
-                Class.forName("com.mysql.jdbc.Driver");
-            Connection conn = DriverManager.getConnection("jdbc:mysql://localhost/simple_login_session","root","Fanta82ns");
-            PreparedStatement st = conn.prepareStatement("SELECT * FROM users WHERE username = ? AND password = ?");
-           
-            String username = request.getParameter("username");
-            String password = request.getParameter("password");
-            st.setString(1,username);
-            st.setString(2, password);
-            
-           ResultSet rs = st.executeQuery();
-           if(rs.next()){
-             out.print("Hello " + rs.getString("username") + " Vas role je: " + rs.getInt("role"));
-             HttpSession sessionObject = request.getSession();
-             sessionObject.setAttribute("username", rs.getString("username"));
-             sessionObject.setAttribute("role", rs.getString("role"));
-           }else{
-               out.print("Invalid login!!!");
-           }
-               
-            }catch(SQLException ex){
-                ex.printStackTrace();
-            } catch (ClassNotFoundException ex) {
-                Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
-            }
-        }
+        HttpSession sessionObject = request.getSession();
+        sessionObject.invalidate();
     }
 
     // <editor-fold defaultstate="collapsed" desc="HttpServlet methods. Click on the + sign on the left to edit the code.">

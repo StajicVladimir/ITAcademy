@@ -15,7 +15,7 @@
         
         <%
             boolean ispravan= false;
-            Cookie[] allCookies = request.getCookies();
+            /*Cookie[] allCookies = request.getCookies();
             if(allCookies != null){
                 for(Cookie ck:allCookies){
                     if(ck.getName().equals("ime")){
@@ -23,10 +23,15 @@
                         out.println(ck.getValue());
                     }
                 }
+            }*/
+            
+            Object username = session.getAttribute("username");
+            if(username!= null){
+                ispravan = true;
             }
             if (ispravan){
         %>
-        <h1>Hello biciklisti!!!</h1>
+        <h1>Hello <%=username%>!!!</h1>
         <%
             }else{
                 out.print("Login error");
