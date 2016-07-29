@@ -1,5 +1,7 @@
 package springapp1;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -11,11 +13,12 @@ package springapp1;
  * @author Vladimir
  */
 public class Bicikli {
+    
+    @Autowired
     private Pedale pedale;
+   
     public Bicikli(){}
-    public Bicikli(Pedale pedale){
-        this.pedale = pedale;
-    }
+  
 
     /**
      * @return the pedale
@@ -28,6 +31,6 @@ public class Bicikli {
      * @param pedale the pedale to set
      */
     public void setPedale(Pedale pedale) {
-        this.pedale = pedale;
+        this.pedale =  pedale;
     }
 }

@@ -5,10 +5,13 @@
  */
 package springapp1;
 
+import org.springframework.stereotype.Component;
+
 /**
  *
  * @author Vladimir
  */
+@Component
 public class PedaleRitchey extends Pedale{
     @Override
     public void pedaliraj(){
