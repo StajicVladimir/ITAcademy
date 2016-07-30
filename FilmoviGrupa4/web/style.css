@@ -2,7 +2,7 @@ body {
         font-family: tahoma, helvetica, arial, sans-serif;
         font-size: 10px;
         text-align: center;
-        background: url(images/page_bg.gif);
+        background: url(img/page_bg.gif);
     }
     
 html, body, #wrapper, h1 {
@@ -79,7 +79,7 @@ h3 {
 }
 
 #header {
-	background: url(images/header_bg.gif) repeat-x;
+	background: url(img/header_bg.gif) repeat-x;
 	padding-top: 9px;
 	position: relative;
 }
@@ -115,7 +115,7 @@ h3 {
 }
 
 #browse dt {
-	background: #c80000 url(images/dt_bg.gif) bottom repeat-x;
+	background: #c80000 url(img/dt_bg.gif) bottom repeat-x;
 	color: #fff;
 	margin: 2px 2px 1px 2px;
 	padding: 6px 0;
@@ -245,7 +245,7 @@ h3 {
 }
 
 #footer {
-	background: #c80000 url(images/footer_bg.gif) repeat-x;
+	background: #c80000 url(img/footer_bg.gif) repeat-x;
 	padding: 8px 8px 5px 8px;
 	position: relative;
 	text-align: center;
