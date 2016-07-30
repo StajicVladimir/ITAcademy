@@ -14,6 +14,8 @@ import model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 
 /**
@@ -45,6 +47,115 @@ public class SiteController {
             p.setDescription(rs.getString("description"));
             p.setPrice(rs.getDouble("price"));
             p.setImage(rs.getString("image"));
+            p.setQuantity(rs.getInt("quantity"));
+            products.add(p);
+        }
+        model.addAttribute("products", products);
+        return "products";
+    }
+    
+    @RequestMapping("/product/{id}")
+    public String product(@PathVariable Integer id, ModelMap model) throws SQLException{
+        
+        ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM product WHERE id='"+id+"'");
+        rs.next();
+        Product p = new Product();
+         p.setId(rs.getInt("id"));
+            p.setName(rs.getString("name"));
+            p.setDescription(rs.getString("description"));
+            p.setPrice(rs.getDouble("price"));
+            p.setImage(rs.getString("image"));
+            p.setQuantity(rs.getInt("quantity"));
+            model.addAttribute("product", p);
+        return "product";
+    }
+    
+    @RequestMapping("/newproduct")
+    public String newproduct(){
+        return "newproduct";
+    }
+    @RequestMapping("/addnewproduct")
+    public String addnewproduct(@ModelAttribute Product product, ModelMap model) throws SQLException{
+        
+        dataSource.getConnection().createStatement().execute("INSERT INTO product VALUES (null,'"
+                +product.getName()+"','"+product.getPrice()+"','"+product.getDescription()+"','"+product.getImage()+"','"+product.getQuantity()+"')");
+        
+        
+        ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM product");
+        List<Product> products = new ArrayList<Product>();
+        
+        while (rs.next()){
+            Product p = new Product();
+            p.setId(rs.getInt("id"));
+            p.setName(rs.getString("name"));
+            p.setDescription(rs.getString("description"));
+            p.setPrice(rs.getDouble("price"));
+            p.setImage(rs.getString("image"));
+            p.setQuantity(rs.getInt("quantity"));
+            products.add(p);
+        }
+        model.addAttribute("products", products);
+        return "products";
+    }
+    
+    @RequestMapping("/removeproduct/{id}")
+    public String removeproduct(@PathVariable Integer id, ModelMap model) throws SQLException{
+        
+        dataSource.getConnection().createStatement().executeUpdate("DELETE FROM product WHERE id='"+id+"'");
+        
+         ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM product");
+        List<Product> products = new ArrayList<Product>();
+        
+        while (rs.next()){
+            Product p = new Product();
+            p.setId(rs.getInt("id"));
+            p.setName(rs.getString("name"));
+            p.setDescription(rs.getString("description"));
+            p.setPrice(rs.getDouble("price"));
+            p.setImage(rs.getString("image"));
+            p.setQuantity(rs.getInt("quantity"));
+            products.add(p);
+        }
+        model.addAttribute("products", products);
+        return "products";
+        
+    }
+    
+    @RequestMapping("/editproduct/{id}")
+    public String editproduct(@PathVariable Integer id, ModelMap model) throws SQLException{
+        
+        ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM product WHERE id='"+id+"'");
+        rs.next();
+        Product p = new Product();
+         p.setId(rs.getInt("id"));
+            p.setName(rs.getString("name"));
+            p.setDescription(rs.getString("description"));
+            p.setPrice(rs.getDouble("price"));
+            p.setImage(rs.getString("image"));
+            p.setQuantity(rs.getInt("quantity"));
+            
+            model.addAttribute("product", p);
+        
+        return "editproduct";
+    }
+    @RequestMapping("/editproductapply")
+    public String editproduct(@ModelAttribute Product product, ModelMap model) throws SQLException{
+       /* 
+        dataSource.getConnection().createStatement().execute("INSERT INTO product VALUES (null,'"
+                +product.getName()+"','"+product.getPrice()+"','"+product.getDescription()+"','"+product.getImage()+"','"+product.getQuantity()+"')");
+        
+        */
+        ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM product");
+        List<Product> products = new ArrayList<Product>();
+        
+        while (rs.next()){
+            Product p = new Product();
+            p.setId(rs.getInt("id"));
+            p.setName(rs.getString("name"));
+            p.setDescription(rs.getString("description"));
+            p.setPrice(rs.getDouble("price"));
+            p.setImage(rs.getString("image"));
+            p.setQuantity(rs.getInt("quantity"));
             products.add(p);
         }
         model.addAttribute("products", products);

@@ -15,6 +15,7 @@ public class Product {
     private String name;
     private String description;
     private String image;
+    private int quantity;
 
     /**
      * @return the id
@@ -84,5 +85,19 @@ public class Product {
      */
     public void setImage(String image) {
         this.image = image;
+    }
+
+    /**
+     * @return the quantity
+     */
+    public int getQuantity() {
+        return quantity;
+    }
+
+    /**
+     * @param quantity the quantity to set
+     */
+    public void setQuantity(int quantity) {
+        this.quantity = quantity;
     }
 }
