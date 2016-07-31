@@ -9,15 +9,19 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import javax.servlet.http.HttpSession;
 import javax.sql.DataSource;
 import model.Buyer;
 import model.Product;
+import model.Sale;
+import model.SaleShow;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 /**
  *
@@ -31,7 +35,11 @@ public class SiteController {
     DataSource dataSource;
     
     @RequestMapping(value = {"/home", "/"})
-    public String homepage(){
+    public String homepage(HttpSession session){
+        if(session.getAttribute("username") == null){
+            session.setAttribute("id", 0);
+            session.setAttribute("username","guest");
+        }
         return "home";
     }
     
@@ -279,5 +287,124 @@ public class SiteController {
         }
         model.addAttribute("buyers", buyers);
         return "buyers";
+    }
+    
+    @RequestMapping("/login")
+    public String login(){
+        return "login";
+    }
+    
+    @RequestMapping("/logincheck")
+    public String logincheck(@RequestParam String username, @RequestParam String password, HttpSession session) throws SQLException{
+        
+        ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM buyer WHERE username ='"+username+"' AND password ='"+password+"'");
+        if (rs.next()){
+            session.setAttribute("id", rs.getInt("id"));
+            session.setAttribute("username", rs.getString("username"));
+        }
+        return "home";
+    }
+    
+    @RequestMapping("/logout")
+    public String logout(HttpSession session){
+        session.invalidate();
+
+        return "home";
+    }
+    
+    public String getBuyerName(int id) throws SQLException{
+         ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM buyer WHERE id = '"+id+"'");
+         String username ="";
+         if(rs.next()){
+             username = rs.getString("username");
+         }
+         System.out.println(username);
+         return username;
+    }
+    int getBuyerId(String username) throws SQLException{
+        ResultSet rs =dataSource.getConnection().createStatement().executeQuery("SELECT * FROM buyer WHERE username = '"+username+"'");
+        int id = 5;
+        if(rs.next()){
+            id = rs.getInt("id");
+        }
+        return id;
+    }
+     public String getProductName(int id) throws SQLException{
+         ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM product WHERE id = '"+id+"'");
+         String name ="";
+         if(rs.next()){
+             name = rs.getString("name");
+         }
+         return name;
+    }
+     public int getProductQuantity(int id) throws SQLException{
+          ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM product WHERE id = '"+id+"'");
+          int quantity = 1;
+          if(rs.next()){
+              quantity = rs.getInt("quantity");
+          }
+          return quantity;
+     }
+    @RequestMapping("/sales")
+    public String sales(ModelMap model) throws SQLException{
+        
+        ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM sale");
+        List<Sale> sales = new ArrayList<Sale>();
+        List<SaleShow> salesShow = new ArrayList<SaleShow>();
+        while(rs.next()){
+            Sale s = new Sale();
+            SaleShow ss = new SaleShow();
+            s.setId(rs.getInt("id"));
+            s.setBuyer(rs.getInt("buyer"));
+            System.out.println(s.getBuyer());
+            ss.setBuyer(getBuyerName(rs.getInt("buyer")));
+            System.out.println(ss.getBuyer());
+            s.setProduct(rs.getInt("product"));
+            ss.setProduct(getProductName(s.getProduct()));
+            s.setDate(rs.getString("date"));
+            ss.setDate(rs.getString("date"));
+            sales.add(s);
+            salesShow.add(ss);
+        }
+        model.addAttribute("sales", sales);
+        model.addAttribute("salesShow", salesShow);
+        
+        return "sales";
+    }
+    
+    @RequestMapping("/buyproduct/{productid}")
+    public String buyproduct(@PathVariable Integer productid, ModelMap model, HttpSession session) throws SQLException{
+        
+        String buyerUsername = (String)session.getAttribute("username");
+        int buyerId = getBuyerId(buyerUsername);
+        System.out.println("productId: "+productid.toString()+", Username: " + session.getAttribute("username") + "user id: " +buyerId);
+        
+        dataSource.getConnection().createStatement().execute("INSERT INTO sale VALUES (null, '"+buyerId+"','"+productid+"',NOW())");
+            int newQuantity = getProductQuantity(productid) - 1;
+            System.out.println("trenutna kolicina: "+getProductQuantity(productid)+"Nova kolicina: "+ newQuantity);
+            dataSource.getConnection().createStatement().execute("UPDATE product SET quantity = '"+newQuantity+"' WHERE id = '"+productid+"'");
+            
+        
+            ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM sale");
+        List<Sale> sales = new ArrayList<Sale>();
+        List<SaleShow> salesShow = new ArrayList<SaleShow>();
+        while(rs.next()){
+            Sale s = new Sale();
+            SaleShow ss = new SaleShow();
+            s.setId(rs.getInt("id"));
+            s.setBuyer(rs.getInt("buyer"));
+            System.out.println(s.getBuyer());
+            ss.setBuyer(getBuyerName(rs.getInt("buyer")));
+            System.out.println(ss.getBuyer());
+            s.setProduct(rs.getInt("product"));
+            ss.setProduct(getProductName(s.getProduct()));
+            s.setDate(rs.getString("date"));
+            ss.setDate(rs.getString("date"));
+            sales.add(s);
+            salesShow.add(ss);
+        }
+        model.addAttribute("sales", sales);
+        model.addAttribute("salesShow", salesShow);
+        return "sales";
     }
 }

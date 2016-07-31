@@ -18,5 +18,9 @@
         <c:out value="In stock: ${product.quantity}"/><br/>
         <a href="../removeproduct/${product.id}">remove this product</a>
         <a href="../editproduct/${product.id}">edit this product</a>
+         <c:if test="${sessionScope.username!= null}">
+             <a href="../buyproduct/${product.id}">buy now</a>
+        </c:if>
+        
     </body>
 </html>
