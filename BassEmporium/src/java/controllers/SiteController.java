@@ -10,6 +10,7 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import javax.sql.DataSource;
+import model.Buyer;
 import model.Product;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -160,5 +161,123 @@ public class SiteController {
         }
         model.addAttribute("products", products);
         return "products";
+    }
+    
+    @RequestMapping("/buyers")
+    public String buyers(ModelMap model) throws SQLException{
+        
+        ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM buyer");
+        
+        List<Buyer> buyers = new ArrayList<Buyer>();
+        
+        while(rs.next()){
+            Buyer b = new Buyer();
+            b.setId(rs.getInt("id"));
+            b.setUsername(rs.getString("username"));
+            b.setPassword(rs.getString("password"));
+            b.setFirstname(rs.getString("firstname"));
+            b.setLastname(rs.getString("lastname"));
+            b.setAdress(rs.getString("adress"));
+            buyers.add(b);
+        }
+        model.addAttribute("buyers", buyers);
+        
+        return "buyers";
+    }
+    
+    @RequestMapping("/newbuyer")
+    public String newbuyer(){
+        return "newbuyer";
+    }
+    
+    @RequestMapping("/addnewbuyer")
+    public String addnewbuyer(@ModelAttribute Buyer buyer, ModelMap model) throws SQLException{
+        
+        dataSource.getConnection().createStatement().executeUpdate("INSERT INTO buyer VALUES (null, '"+buyer.getUsername()+"',"
+                + "'"+buyer.getPassword()+"','"+buyer.getFirstname()+"','"+buyer.getLastname()+"','"+buyer.getAdress()+"')");
+        
+        
+         ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM buyer");
+        
+        List<Buyer> buyers = new ArrayList<Buyer>();
+        
+        while(rs.next()){
+            Buyer b = new Buyer();
+            b.setId(rs.getInt("id"));
+            b.setUsername(rs.getString("username"));
+            b.setPassword(rs.getString("password"));
+            b.setFirstname(rs.getString("firstname"));
+            b.setLastname(rs.getString("lastname"));
+            b.setAdress(rs.getString("adress"));
+            buyers.add(b);
+        }
+        model.addAttribute("buyers", buyers);
+        return "buyers";
+    }
+    
+    @RequestMapping("/editbuyer/{id}")
+    public String editbuyer(@PathVariable Integer id, ModelMap model) throws SQLException{
+        
+        ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM buyer WHERE id='"+id+"'");
+        if(rs.next()){
+            Buyer buyer = new Buyer();
+            buyer.setId(id);
+            buyer.setUsername(rs.getString("username"));
+            buyer.setPassword(rs.getString("password"));
+            buyer.setFirstname(rs.getString("firstname"));
+            buyer.setLastname(rs.getString("lastname"));
+            buyer.setAdress(rs.getString("adress"));
+            model.addAttribute("buyer", buyer);
+            System.out.println(buyer.getId());
+        }
+        return "editbuyer";
+    }
+    
+    @RequestMapping("/editbuyerapply")
+    public String editbuyerapply(@ModelAttribute Buyer buyer, ModelMap model) throws SQLException{
+        
+        System.out.println(buyer.getFirstname()+" , "+buyer.getId());
+        dataSource.getConnection().createStatement().execute("UPDATE buyer SET username='"+buyer.getUsername()+"', password ='"+buyer.getPassword()+"'"
+                + ", firstname = '"+buyer.getFirstname()+"', lastname='"+buyer.getLastname()+"', adress ='"+buyer.getAdress()+"' WHERE id='"+buyer.getId()+"'");
+       
+         ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM buyer");
+        
+        List<Buyer> buyers = new ArrayList<Buyer>();
+        
+        while(rs.next()){
+            Buyer b = new Buyer();
+            b.setId(rs.getInt("id"));
+            b.setUsername(rs.getString("username"));
+            b.setPassword(rs.getString("password"));
+            b.setFirstname(rs.getString("firstname"));
+            b.setLastname(rs.getString("lastname"));
+            b.setAdress(rs.getString("adress"));
+            buyers.add(b);
+        }
+        model.addAttribute("buyers", buyers);
+        return "buyers";
+    }
+    
+    @RequestMapping("/removebuyer/{id}")
+    public String removebuyer(@PathVariable Integer id, ModelMap model) throws SQLException{
+        
+        dataSource.getConnection().createStatement().executeUpdate("DELETE FROM buyer WHERE id='"+id+"'");
+        
+        ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM buyer");
+        
+        List<Buyer> buyers = new ArrayList<Buyer>();
+        
+        while(rs.next()){
+            Buyer b = new Buyer();
+            b.setId(rs.getInt("id"));
+            b.setUsername(rs.getString("username"));
+            b.setPassword(rs.getString("password"));
+            b.setFirstname(rs.getString("firstname"));
+            b.setLastname(rs.getString("lastname"));
+            b.setAdress(rs.getString("adress"));
+            buyers.add(b);
+        }
+        model.addAttribute("buyers", buyers);
+        return "buyers";
     }
 }
