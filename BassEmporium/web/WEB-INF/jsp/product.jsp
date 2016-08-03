@@ -42,7 +42,10 @@
             <strong>In stock: </strong>${product.quantity}<br/><br/>
             <a class="btn btn-default" href="/BassEmporium/removeproduct/${product.id}">remove this product</a>
             <a class="btn btn-default" href="/BassEmporium/editproduct/${product.id}">edit this product</a>
-             <c:if test="${sessionScope.username!= null}">
+             <c:if test="${product.quantity<= 0}">
+                 <a class="btn btn-default disabled" href="/BassEmporium/buyproduct/${product.id}">buy now</a>
+            </c:if>
+            <c:if test="${product.quantity> 0}">
                  <a class="btn btn-default" href="/BassEmporium/buyproduct/${product.id}">buy now</a>
             </c:if>
         </div>

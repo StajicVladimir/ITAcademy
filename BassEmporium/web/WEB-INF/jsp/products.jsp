@@ -36,12 +36,15 @@
             </ul>
         </nav>
         <h1>Products page</h1>
+        <div style="width: 100%">
+            <a class="btn btn-primary" href ="/BassEmporium/newproduct">Add new</a>
+        </div>
         <c:forEach items="${products}" var="product">
             <div class="col-sm-6" style="width:40%; margin: 5%; border : 1px solid lightgray; border-radius: 10px;">
-                <div style="width:30%; display : inline-block; float:left">
-                    <img class="img-rounded" src="/BassEmporium/${product.image}" alt="Product image"> 
+                <div style="width:28%; display : inline-block; float:left; margin-right: 2%">
+                    <img class="img-rounded" src="/BassEmporium/${product.image}" height = "428" width="132" alt="Product image"> 
                 </div>
-                <div style="width:70%; display : inline-block; float:right">
+                <div style="width:68%; display : inline-block; float:right; margin-left: 2%">
                     <div>
                         <h3>${product.name}</h3>
                     </div>
