@@ -149,11 +149,14 @@ public class SiteController {
     }
     @RequestMapping("/editproductapply")
     public String editproduct(@ModelAttribute Product product, ModelMap model) throws SQLException{
-       /* 
-        dataSource.getConnection().createStatement().execute("INSERT INTO product VALUES (null,'"
-                +product.getName()+"','"+product.getPrice()+"','"+product.getDescription()+"','"+product.getImage()+"','"+product.getQuantity()+"')");
+        String desc = product.getDescription();
+        desc = desc.replace("'", "\\'");
+        String query = "UPDATE product SET  name ='"
+                +product.getName()+"', price = '"+product.getPrice()+"', description = '"+desc+"', image ='"+product.getImage()+"', quantity = '"+product.getQuantity()+"' WHERE id ='"+product.getId()+"'";
+        System.out.println(query);
+        dataSource.getConnection().createStatement().execute(query);
+       
         
-        */
         ResultSet rs = dataSource.getConnection().createStatement().executeQuery("SELECT * FROM product");
         List<Product> products = new ArrayList<Product>();
         
