@@ -36,10 +36,16 @@ and open the template in the editor.
 
             ul li  a:hover:not(.active) {
                 background-color: #111;
+                color: white;
+                text-decoration: none;
             }
 
             .active {
             /* background-color:#337ab7;*/
                 background: grey;
                 
+            }
+            ul li a:hover{
+                color: white;
+                text-decoration: none;
             }
