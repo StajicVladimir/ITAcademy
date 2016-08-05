@@ -3,21 +3,19 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package ormexample1;
-
-import java.util.List;
+package company;
 
 /**
  *
  * @author Vladimir
  */
-public class Weapon {
-    public int id;
-    public String name;
-    List<Player> players;
-    
-    @Override
-    public String toString(){
-        return this.name;
+public class Company {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
     }
+    
 }

@@ -15,4 +15,8 @@ public class Player {
     public String name;
     public Weapon weapon;
     
+    @Override
+    public String toString(){
+       return "Name:" + this.name + ", weapon: "+this.weapon.name; 
+    }
 }
