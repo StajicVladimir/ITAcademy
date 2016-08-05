@@ -7,7 +7,10 @@ package company;
 
 import dao.Employe;
 import dao.EmployeDAO;
+import java.util.List;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -20,8 +23,29 @@ public class HomeForm extends javax.swing.JFrame {
      */
     public HomeForm() {
         initComponents();
+        writeToTable(getAll());
+        jTextField1.setEnabled(false);
     }
-
+    public List<Employe> getAll(){
+        List<Employe> employes;
+        EmployeDAO eDAO = new EmployeDAO();
+        employes = eDAO.getAll();
+        
+        return employes;
+    }
+    public void writeToTable(List<Employe> employes){
+        
+        DefaultTableModel dtm = (DefaultTableModel) jTable2.getModel();
+        
+        int brojRedova = jTable2.getRowCount();
+            for(int i=0;i<brojRedova;i++){
+                dtm.removeRow(0);
+            }
+        
+        for(Employe e : employes){
+            dtm.addRow(new Object[] {e.getId(), e.getName(), e.getAge(), e.getAddress(), e.getIncome()});
+        }
+    }
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -31,38 +55,85 @@ public class HomeForm extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
-        jLabel3 = new javax.swing.JLabel();
-        jLabel4 = new javax.swing.JLabel();
-        jTFName = new javax.swing.JTextField();
-        jTFAge = new javax.swing.JTextField();
-        jTFAddress = new javax.swing.JTextField();
-        jTFIncome = new javax.swing.JTextField();
         jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
+        jLabel1 = new javax.swing.JLabel();
+        jComboBox1 = new javax.swing.JComboBox();
+        jTextField1 = new javax.swing.JTextField();
+        jBDelete = new javax.swing.JButton();
+        jUpdateEmployeButton = new javax.swing.JButton();
+        jButtonRefresh = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                formFocusGained(evt);
+            }
+        });
+        addWindowFocusListener(new java.awt.event.WindowFocusListener() {
+            public void windowGainedFocus(java.awt.event.WindowEvent evt) {
+                formWindowGainedFocus(evt);
+            }
+            public void windowLostFocus(java.awt.event.WindowEvent evt) {
+            }
+        });
 
-        jLabel1.setText("Name:");
-
-        jLabel2.setText("Age: ");
-
-        jLabel3.setText("Address:");
-
-        jLabel4.setText("Income:");
-
-        jButton1.setText("Insert");
+        jButton1.setText("Insert new employe");
         jButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButton1ActionPerformed(evt);
             }
         });
 
-        jButton2.setText("jButton2");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "#", "Name", "Age", "Address", "Income"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.Double.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane2.setViewportView(jTable2);
+
+        jLabel1.setText("Employe income");
+
+        jComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "all", "=", ">", "<" }));
+        jComboBox1.addItemListener(new java.awt.event.ItemListener() {
+            public void itemStateChanged(java.awt.event.ItemEvent evt) {
+                jComboBox1ItemStateChanged(evt);
+            }
+        });
+
+        jBDelete.setText("Delete slected employe");
+        jBDelete.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                jBDeleteActionPerformed(evt);
+            }
+        });
+
+        jUpdateEmployeButton.setText("Update selected employe");
+        jUpdateEmployeButton.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jUpdateEmployeButtonActionPerformed(evt);
+            }
+        });
+
+        jButtonRefresh.setText("Refresh");
+        jButtonRefresh.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonRefreshActionPerformed(evt);
             }
         });
 
@@ -71,50 +142,46 @@ public class HomeForm extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jButton1)
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jScrollPane2)
+                        .addContainerGap())
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel1)
-                            .addComponent(jLabel2)
-                            .addComponent(jLabel3)
-                            .addComponent(jLabel4))
-                        .addGap(24, 24, 24)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jLabel1)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 58, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jButton1))
+                        .addGap(18, 18, 18)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jTFIncome, javax.swing.GroupLayout.PREFERRED_SIZE, 48, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                                .addComponent(jButton2)
-                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                    .addComponent(jTFName)
-                                    .addComponent(jTFAge, javax.swing.GroupLayout.PREFERRED_SIZE, 49, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jTFAddress, javax.swing.GroupLayout.DEFAULT_SIZE, 137, Short.MAX_VALUE))))))
-                .addContainerGap(178, Short.MAX_VALUE))
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(jBDelete)
+                                .addGap(53, 53, 53)
+                                .addComponent(jUpdateEmployeButton))
+                            .addComponent(jButtonRefresh))
+                        .addGap(65, 65, Short.MAX_VALUE))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(17, 17, 17)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(jTFName, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jTFAge, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel3)
-                    .addComponent(jTFAddress, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel4)
-                    .addComponent(jTFIncome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(31, 31, 31)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jButton1)
-                    .addComponent(jButton2))
-                .addContainerGap(95, Short.MAX_VALUE))
+                    .addComponent(jBDelete)
+                    .addComponent(jUpdateEmployeButton))
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel1)
+                    .addComponent(jComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jButtonRefresh))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 222, Short.MAX_VALUE)
+                .addGap(5, 5, 5))
         );
 
         pack();
@@ -122,29 +189,80 @@ public class HomeForm extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         // TODO add your handling code here:
-        String name = jTFName.getText();
-        int age = Integer.parseInt(jTFAge.getText());
-        String address = jTFAddress.getText();
-        double income = Double.parseDouble(jTFIncome.getText());
-        
-        Employe e = new Employe();
-        e.setName(name);
-        e.setAge(age);
-        e.setAddress(address);
-        e.setIncome(income);
-        
-        EmployeDAO eDAO = new EmployeDAO();
-        
-        eDAO.insert(e);
-        
+        JFrame insertEmploye = new NewEmployeForm();
+        insertEmploye.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+        insertEmploye.setVisible(true);
+       
     }//GEN-LAST:event_jButton1ActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void jBDeleteActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBDeleteActionPerformed
         // TODO add your handling code here:
-       JFrame nova = new Nova();
-       nova.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
-                nova.setVisible(true);
-    }//GEN-LAST:event_jButton2ActionPerformed
+        int row = jTable2.getSelectedRow();
+        if(row == -1){
+          JOptionPane.showMessageDialog(this, "Select employe from table first!");  
+        }else{
+            EmployeDAO eDAO = new EmployeDAO();
+            int id = (int)jTable2.getValueAt(row, 0);
+            eDAO.delete(id);
+            JOptionPane.showMessageDialog(this, "Deleted employe!");
+            writeToTable(getAll());
+        }
+    }//GEN-LAST:event_jBDeleteActionPerformed
+
+    private void formFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_formFocusGained
+        // TODO add your handling code here:
+        writeToTable(getAll());
+        jTextField1.setEnabled(false);
+    }//GEN-LAST:event_formFocusGained
+
+    private void formWindowGainedFocus(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowGainedFocus
+        // TODO add your handling code here:
+        writeToTable(getAll());
+        jTextField1.setEnabled(false);
+    }//GEN-LAST:event_formWindowGainedFocus
+
+    private void jUpdateEmployeButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jUpdateEmployeButtonActionPerformed
+        // TODO add your handling code here:
+        int row = jTable2.getSelectedRow();
+        if(row == -1){
+          JOptionPane.showMessageDialog(this, "Select employe from table first!");  
+        }else{
+            EmployeDAO eDAO = new EmployeDAO();
+            Employe e = new Employe();
+            int id = (int)jTable2.getValueAt(row, 0);
+            e = eDAO.getEmploye(id);
+            JFrame updateEmploye = new UpdateEmployeForm(e);
+            updateEmploye.setDefaultCloseOperation(JFrame.HIDE_ON_CLOSE);
+            updateEmploye.setVisible(true);
+        }
+        
+    }//GEN-LAST:event_jUpdateEmployeButtonActionPerformed
+
+    private void jButtonRefreshActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonRefreshActionPerformed
+        // TODO add your handling code here:
+        String query = new String();
+        
+        if(jComboBox1.getSelectedItem().toString().equalsIgnoreCase("all")){
+            query = " ";
+        }else{
+            query=" WHERE income "+jComboBox1.getSelectedItem().toString()+" "+jTextField1.getText();
+        }
+        EmployeDAO eDAO = new EmployeDAO();
+        List<Employe> employes = eDAO.getAllFilter(query);
+        writeToTable(employes);
+        //System.out.println(query);
+    }//GEN-LAST:event_jButtonRefreshActionPerformed
+
+    private void jComboBox1ItemStateChanged(java.awt.event.ItemEvent evt) {//GEN-FIRST:event_jComboBox1ItemStateChanged
+        // TODO add your handling code here:
+        String selected = jComboBox1.getSelectedItem().toString();
+        
+        if (selected.equals("all")){
+            jTextField1.setEnabled(false);
+        }else{
+            jTextField1.setEnabled(true);
+        }
+    }//GEN-LAST:event_jComboBox1ItemStateChanged
 
     /**
      * @param args the command line arguments
@@ -182,15 +300,14 @@ public class HomeForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jBDelete;
     private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton jButtonRefresh;
+    private javax.swing.JComboBox jComboBox1;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
-    private javax.swing.JLabel jLabel3;
-    private javax.swing.JLabel jLabel4;
-    private javax.swing.JTextField jTFAddress;
-    private javax.swing.JTextField jTFAge;
-    private javax.swing.JTextField jTFIncome;
-    private javax.swing.JTextField jTFName;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JTable jTable2;
+    private javax.swing.JTextField jTextField1;
+    private javax.swing.JButton jUpdateEmployeButton;
     // End of variables declaration//GEN-END:variables
 }
