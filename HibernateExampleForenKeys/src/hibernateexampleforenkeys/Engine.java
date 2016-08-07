@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package paymentserver;
+package hibernateexampleforenkeys;
 
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
@@ -22,7 +22,7 @@ public class Engine {
         
         if(session == null){
             Configuration config = new Configuration();
-            config.configure("/paymentserver/hibernate.cfg.xml");
+            config.configure("/hibernateexampleforenkeys/hibernate.cfg.xml");
             ServiceRegistry serviceRegistry = new StandardServiceRegistryBuilder().applySettings(config.getProperties()).build();
             SessionFactory sessionFactory = config.buildSessionFactory(serviceRegistry);
             session = sessionFactory.openSession();

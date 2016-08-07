@@ -10,6 +10,7 @@
     <property name ="hibernate.connection.autocommit">true</property>
     <property name="hibernate.show_sql">true</property>
     <property name="hibernate.hbm2ddl.auto">update</property>
-    <mapping class ="entities.Card"/>
+    <mapping class ="hibernateexampleforenkeys.City"/>
+    <mapping class ="hibernateexampleforenkeys.Club"/>
   </session-factory>
 </hibernate-configuration>
