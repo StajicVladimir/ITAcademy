@@ -245,7 +245,11 @@ public class HomeForm extends javax.swing.JFrame {
         if(jComboBox1.getSelectedItem().toString().equalsIgnoreCase("all")){
             query = " ";
         }else{
-            query=" WHERE income "+jComboBox1.getSelectedItem().toString()+" "+jTextField1.getText();
+            if(jTextField1.getText().isEmpty()){
+                JOptionPane.showMessageDialog(this, "You must enter income value!"); 
+            }else{
+                query=" WHERE income "+jComboBox1.getSelectedItem().toString()+" "+jTextField1.getText();
+            }
         }
         EmployeDAO eDAO = new EmployeDAO();
         List<Employe> employes = eDAO.getAllFilter(query);

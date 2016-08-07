@@ -50,6 +50,7 @@ public class UpdateEmployeForm extends javax.swing.JFrame {
         jTextFieldAddress = new javax.swing.JTextField();
         jTextFieldIncome = new javax.swing.JTextField();
         jButtonUpdate = new javax.swing.JButton();
+        jButtonCancel = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -65,6 +66,13 @@ public class UpdateEmployeForm extends javax.swing.JFrame {
         jButtonUpdate.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 jButtonUpdateActionPerformed(evt);
+            }
+        });
+
+        jButtonCancel.setText("Cancel");
+        jButtonCancel.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButtonCancelActionPerformed(evt);
             }
         });
 
@@ -87,7 +95,10 @@ public class UpdateEmployeForm extends javax.swing.JFrame {
                             .addComponent(jTextFieldAddress)
                             .addComponent(jTextFieldIncome, javax.swing.GroupLayout.PREFERRED_SIZE, 55, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jTextFieldAge, javax.swing.GroupLayout.PREFERRED_SIZE, 53, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                    .addComponent(jButtonUpdate))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(jButtonUpdate)
+                        .addGap(32, 32, 32)
+                        .addComponent(jButtonCancel)))
                 .addContainerGap(20, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -110,7 +121,9 @@ public class UpdateEmployeForm extends javax.swing.JFrame {
                     .addComponent(jLabel4)
                     .addComponent(jTextFieldIncome, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
-                .addComponent(jButtonUpdate)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jButtonUpdate)
+                    .addComponent(jButtonCancel))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -133,6 +146,11 @@ public class UpdateEmployeForm extends javax.swing.JFrame {
         
         this.setVisible(false);
     }//GEN-LAST:event_jButtonUpdateActionPerformed
+
+    private void jButtonCancelActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButtonCancelActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_jButtonCancelActionPerformed
 
     /**
      * @param args the command line arguments
@@ -170,6 +188,7 @@ public class UpdateEmployeForm extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton jButtonCancel;
     private javax.swing.JButton jButtonUpdate;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
