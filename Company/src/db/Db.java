@@ -18,7 +18,7 @@ public class Db {
     
     public static Connection getConnection() throws SQLException{
         if (conn == null){
-            conn = DriverManager.getConnection("jdbc:mysql://localhost/company", "root", "");
+            conn = DriverManager.getConnection("jdbc:mysql://localhost/company", "root", "Fanta82ns");
         }
         return conn;
     }
