@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<root>
+    <country countryCode="sr">
+      <name>Serbia</name>
+      <capital>Belgrade</capital>
+      <description>Serbia is.....</description>
+  </country>
+  <country countryCode="fr">
+      <name>France</name>
+      <capital>Paris</capital>
+      <description>France is.....</description>
+  </country>
+</root>

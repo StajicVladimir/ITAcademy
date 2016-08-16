@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+<!DOCTYPE root SYSTEM "books.dtd">
+<root>
+    <books>
+        <book id="_01" isbn="12345">
+            <title>Childhood's End</title> 
+            <author>Arthur Clarke</author> 
+        </book>
+        <book id="_02" isbn="67890">
+            <title>The Merchant of Venice</title> 
+            <author>William Shakespeare</author> 
+        </book>
+    </books>
+</root>
