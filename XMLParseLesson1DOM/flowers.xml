@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+
+
+<flowers>
+    <flower id="1">
+        <vrsta>
+            Orhideja
+        </vrsta>
+        <boja>
+            crna
+        </boja>
+    </flower>
+    
+    <flower id="4">
+        <vrsta>
+            Muskatla
+        </vrsta>
+        <boja>
+            sarena
+        </boja>
+    </flower>
+    
+    <flower id="7">
+        <vrsta>
+            Ambrozija
+        </vrsta>
+        <boja>
+            zuta
+        </boja>
+    </flower>
+</flowers>
