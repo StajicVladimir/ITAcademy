@@ -18,12 +18,12 @@
         <div style="display: inline; float: left; width: 40%; margin: 10px; border: lightslategray solid 2px; border-radius: 10px;">
             <form name="translate" action="translate">
                 <div style="margin: 10px;">
-                    Unesite reč koju želite da prevedete:
-                    <input type ="text" name="word" id="word"/>
+                    <label>Unesite reč koju želite da prevedete:</label>
+                    <input class="form-control" type ="text" name="word" id="word" required/>
                 </div>
                 <div style="margin: 10px;">
-                    <span style="width: 60%">Odaberite jezik sa kojeg se prevodi: </span>
-                    <select name="language">
+                    <label>Odaberite jezik sa kojeg se prevodi: </label>
+                    <select class ="form-control" name="language" required>
                         <option value="">Odaberite jezik</option>
                         <option value="srb">Srpski</option>
                         <option value="eng">Engleski</option>
@@ -31,8 +31,8 @@
                     </select>
                 </div>
                 <div style="margin: 10px;">
-                    Odaberite jezik na koji se prevodi:
-                    <select name="targetLanguage">
+                    <label>Odaberite jezik na koji se prevodi:</label>
+                    <select class="form-control" name="targetLanguage" required>
                         <option value="">Odaberite jezik</option>
                         <option value="srb">Srpski</option>
                         <option value="eng">Engleski</option>
@@ -40,7 +40,7 @@
                     </select>
                 </div>
                 <div style="margin: 10px;">
-                    <input type="submit" value ="translate"/>
+                    <input class ="form-control " type="submit" value ="translate" style="width: 9em" />
                 </div>
             </form>
         </div>
