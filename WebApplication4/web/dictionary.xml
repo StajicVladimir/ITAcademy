@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dictionary>
+    <word>
+        <srb>zdravo</srb>
+        <eng>hello</eng>
+        <de>hallo</de>
+    </word>
+    <word>
+        <srb>kuća</srb>
+        <eng>house</eng>
+        <de>haus</de>
+    </word>
+    <word>
+        <srb>kompjuter</srb>
+        <eng>computer</eng>
+        <de>computer</de>
+    </word>
+    <word>
+        <srb>levo</srb>
+        <eng>left</eng>
+        <de>links</de>
+    </word>
+    <word>
+        <srb>desno</srb>
+        <eng>right</eng>
+        <de>recht</de>
+    </word>
+    <word>
+        <srb>hrana</srb>
+        <eng>food</eng>
+        <de>lebensmittel</de>
+    </word>
+</dictionary>
