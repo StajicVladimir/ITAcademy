@@ -13,9 +13,9 @@
         <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
         <title>Translator 1.0</title>
     </head>
-    <body style="margin: 0% 5% 5% 5%">
+    <body style="margin: 0% 30% 5% 30%">
         <h1>Translator 1.0</h1>
-        <div style="display: inline; float: left; width: 40%; margin: 10px; border: lightslategray solid 2px; border-radius: 10px;">
+        <div style=" border: lightslategray solid 2px; border-radius: 10px;">
             <form name="translate" action="translate">
                 <div style="margin: 10px;">
                     <label>Unesite reč koju želite da prevedete:</label>
@@ -43,16 +43,20 @@
                     <input class ="form-control " type="submit" value ="translate" style="width: 9em" />
                 </div>
             </form>
+            <div style="margin:10px;">
+            <label>Prevod:</label>
+                <c:choose>
+                    <c:when test="${translation!=null}">
+                        <p style="font-size: 3em">${translation}</p>
+                    </c:when>
+                    <c:otherwise>
+                         <p style="font-size: 3em;">Unesite reč za prevod</p>
+                    </c:otherwise>
+                </c:choose>
+            </div>
         </div>
-        <div style="display: inline; float: right; width: 40%; margin: 10px;">
-        <c:choose>
-            <c:when test="${translation!=null}">
-                <p style="font-size: 3em">${translation}</p>
-            </c:when>
-            <c:otherwise>
-                 <p style="font-size: 3em;">Unesite reč za prevod</p>
-            </c:otherwise>
-        </c:choose>
-        </div>
+       <!-- <div style="display: inline; float: right; width: 40%; margin: 10px;">-->
+        
+       <!-- </div>-->
     </body>
 </html>
