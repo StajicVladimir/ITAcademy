@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.ChoiceBox?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TextField?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:controller="controller.UnosUgovoraController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="363.0" prefWidth="398.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <ChoiceBox fx:id="brzinaChoice" layoutX="157.0" layoutY="64.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="protokChoice" layoutX="157.0" layoutY="113.0" prefWidth="150.0" />
+      <ChoiceBox fx:id="periodChoice" layoutX="157.0" layoutY="158.0" prefWidth="150.0" />
+      <TextField fx:id="imePrezimeTF" layoutX="158.0" layoutY="207.0" />
+      <TextField fx:id="adresaTF" layoutX="158.0" layoutY="256.0" />
+      <Label fx:id="brzinaLbl" layoutX="63.0" layoutY="68.0" text="Brzina: " />
+      <Label fx:id="protokLbl" layoutX="63.0" layoutY="117.0" text="Protok: " />
+      <Label fx:id="periodLbl" layoutX="63.0" layoutY="162.0" text="Period: " />
+      <Label fx:id="imePrezimeLbl" layoutX="63.0" layoutY="211.0" text="Ime i prezime:" />
+      <Label fx:id="adresaLbl" layoutX="63.0" layoutY="260.0" text="Adresa:" />
+      <Button fx:id="unesiBtn" layoutX="86.0" layoutY="311.0" mnemonicParsing="false" onAction="#unesi" text="Unesi" />
+      <Button fx:id="odustaniBtn" layoutX="255.0" layoutY="311.0" mnemonicParsing="false" onAction="#odustani" text="Odustani" />
+      <Label fx:id="headlineLbl" layoutX="55.0" layoutY="14.0" text="Unos novog ugovora">
+         <font>
+            <Font name="System Bold" size="31.0" />
+         </font>
+      </Label>
+   </children>
+</AnchorPane>

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.Button?>
+<?import javafx.scene.control.Label?>
+<?import javafx.scene.control.TableView?>
+<?import javafx.scene.layout.AnchorPane?>
+<?import javafx.scene.text.Font?>
+
+
+<AnchorPane fx:controller="controller.GlavniEkranController" maxHeight="-Infinity" maxWidth="-Infinity" minHeight="-Infinity" minWidth="-Infinity" prefHeight="380.0" prefWidth="665.0" xmlns="http://javafx.com/javafx/8.0.60" xmlns:fx="http://javafx.com/fxml/1">
+   <children>
+      <Label fx:id="glavniEkranLbl" layoutX="24.0" layoutY="14.0" text="Prodaja Internet Paketa 1.0">
+         <font>
+            <Font size="37.0" />
+         </font>
+      </Label>
+      <TableView fx:id="sviUgovoriTable" layoutX="24.0" layoutY="83.0" prefHeight="267.0" prefWidth="508.0" />
+      <Button fx:id="noviUgovorBtn" layoutX="541.0" layoutY="83.0" mnemonicParsing="false" onAction="#noviUgovor" prefHeight="25.0" prefWidth="92.0" text="Novi Ugovor" />
+      <Button fx:id="obrisiUgovorBtn" layoutX="541.0" layoutY="125.0" mnemonicParsing="false" onAction="#obrisiUgovor" prefHeight="25.0" prefWidth="92.0" text="Obriši ugovor" />
+   </children>
+</AnchorPane>
